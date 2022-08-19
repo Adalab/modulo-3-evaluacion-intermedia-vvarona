@@ -5,12 +5,6 @@ import QuotesData from "./quoteData.json"
 function App() {
 
   const [quoteData, setQuoteData] = useState(QuotesData);
-
-  const [newQuote, setNewQuote] = useState({
-      quote: "",
-      character: ""
-    
-  })
   
   const renderQuoteData = quoteData.map((item, index) =>{
     return (<li className='quoteItem' key={index}>
@@ -22,10 +16,6 @@ function App() {
 
   const handleSubmit = (ev) => {
     ev.preventDefault()
-    setNewQuote(...{
-      quote:,
-      character:
-    })
   }
 
   return (

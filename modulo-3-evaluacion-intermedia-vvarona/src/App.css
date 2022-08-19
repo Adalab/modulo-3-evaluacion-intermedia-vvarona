@@ -1,0 +1,16 @@
+:root {
+  font-size: 62.5%;
+}
+
+.App {
+  text-align: center;
+  font-size: 1.6rem;
+}
+
+.quoteItem {
+  list-style: none;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 0.1rem solid black;
+  border-radius: 1rem;
+}

@@ -1,63 +1,80 @@
-import { useState } from 'react';
-import './App.css';
-import QuotesData from "./quoteData.json"
+import { useEffect, useState } from 'react';
+import './styles/App.css';
+import NewQuoteForm from './components/NewQuoteForm';
+import callToApi from './services/Fetch';
+import FilterForm from './components/FilterForm';
 
 function App() {
+    const [quoteData, setQuoteData] = useState([]);
+    const [quoteInput, setQuoteInput] = useState('');
+    const [characterInput, setCharacterInput] = useState('');
+    const [filterQuote, setFilterQuote] = useState('');
 
-  const [quoteData, setQuoteData] = useState(QuotesData);
-  
-  const renderQuoteData = quoteData.map((item, index) =>{
-    return (<li className='quoteItem' key={index}>
-      <p className='quoteItemText'>"{item.quote}"</p>
-      <span className='quoteItemCharacter'>- {item.character}</span>
-    </li>
+    useEffect(() => {
+        callToApi()
+            .then((data) => {
+                setQuoteData(data);
+            })
+    }, [])
+
+    const createNewQuote = (quoteInput, characterInput) => {
+        return ({
+            quote: quoteInput,
+            character: characterInput
+        })
+    };
+
+    const handleQuoteInput = (ev) => {
+        setQuoteInput(ev.target.value);
+    }
+
+    const handleCharacterInput = (ev) => {
+        setCharacterInput(ev.target.value);
+    }
+
+    const handleFilterInput = (ev) => {
+        setFilterQuote(ev.target.value);
+    }
+
+    const handleAddQuoteButon = (ev) => {
+        ev.preventDefault();
+        const newQuote = createNewQuote(quoteInput, characterInput);
+        setQuoteData([...quoteData, newQuote])
+    }
+
+
+    //hacer un doble filtrado para el filtro del select con una comparacion ===
+
+    const renderQuoteData = quoteData.filter((item)=>item.quote.toLowerCase().includes(filterQuote.toLowerCase())).map((item, index) => {
+
+        return (<li className='quote-item' key={index}>
+            <p className='quote-item-text'>"{item.quote}"</p>
+            <span className='quote-item-character'>- {item.character}</span>
+        </li>
+        );
+    });
+
+    return (
+        <div className="App">
+            <header>
+                <h1 className='header-title'>Frases de Friends</h1>
+            </header>
+            <FilterForm
+                handleFilterInput={handleFilterInput}
+                filterQuote={filterQuote}
+            />
+            <section>
+                <ul className='quote-list'>
+                    {renderQuoteData}
+                </ul>
+            </section>
+            <NewQuoteForm
+                handleAddQuoteButon={handleAddQuoteButon}
+                handleCharacterInput={handleCharacterInput}
+                handleQuoteInput={handleQuoteInput}
+            />
+        </div>
     );
-  });
-
-  const handleSubmit = (ev) => {
-    ev.preventDefault()
-  }
-
-  return (
-    <div className="App">
-      <header>
-        <h1>Frases de Friends</h1>
-      </header>
-      <main>
-        <section>
-          <ul>
-            {renderQuoteData}
-          </ul>
-        </section>
-        <section>
-          <h3>Añadir una nueva frase</h3>
-          <form>
-            <label htmlFor='newQuoteInput'>Frase:</label>
-            <input
-              type='newQuoteInput'
-              name='newQuoteInput'
-              id='newQuoteInput' 
-              title='Escribe aquí una nueva frase'
-              //onChange={handleNewQuoteInput}
-            />
-            <label htmlFor='newCharacterInput'>Personaje:</label>
-            <input
-              type='newCharacterInput'
-              name='newCharacterInput'
-              id='newCharacterInput' 
-              title='Escribe el personaje de la frase'
-              //onChange={handleNewQuoteInput}
-            />
-            <input 
-              type='submit' 
-              value='Añadir la nueva frase' 
-              onClick={handleSubmit}
-            />
-          </form>
-        </section>
-      </main>
-    </div>
-  );
 }
 
 export default App;

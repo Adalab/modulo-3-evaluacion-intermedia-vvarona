@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import './styles/App.css';
+import './styles/App.scss';
 import NewQuoteForm from './components/NewQuoteForm';
 import callToApi from './services/Fetch';
 import FilterForm from './components/FilterForm';
@@ -36,16 +36,41 @@ function App() {
         setFilterQuote(ev.target.value);
     }
 
+    const cleanInput = () => {
+        setCharacterInput('');
+        setQuoteInput('');
+    }
+
+
     const handleAddQuoteButon = (ev) => {
         ev.preventDefault();
-        const newQuote = createNewQuote(quoteInput, characterInput);
-        setQuoteData([...quoteData, newQuote])
+
+        console.log(quoteInput + ',' + characterInput);
+
+        if (quoteInput !== "" && characterInput !== "") {
+            const newQuote = createNewQuote(quoteInput, characterInput);
+            setQuoteData([...quoteData, newQuote])
+            cleanInput()
+        }
+
     }
 
 
     //hacer un doble filtrado para el filtro del select con una comparacion ===
 
-    const renderQuoteData = quoteData.filter((item)=>item.quote.toLowerCase().includes(filterQuote.toLowerCase())).map((item, index) => {
+    const filterByQuote = (quoteList) => {
+        return (
+            quoteList.filter((item) => item.quote.toLowerCase().includes(filterQuote.toLowerCase())))
+    }
+
+    /*  const filterByCharacter = (quoteList) => {
+         return (
+             quoteList.filter((item) => item.character.toLowerCase() === filterCharacter.toLowerCase())
+         )
+     } */
+    const filteredByText = filterByQuote(quoteData)
+
+    const renderQuoteData = filteredByText.map((item, index) => {
 
         return (<li className='quote-item' key={index}>
             <p className='quote-item-text'>"{item.quote}"</p>
@@ -72,6 +97,8 @@ function App() {
                 handleAddQuoteButon={handleAddQuoteButon}
                 handleCharacterInput={handleCharacterInput}
                 handleQuoteInput={handleQuoteInput}
+                quoteValue={quoteInput}
+                characterValue={characterInput}
             />
         </div>
     );

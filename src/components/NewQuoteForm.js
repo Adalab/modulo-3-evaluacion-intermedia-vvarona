@@ -1,25 +1,25 @@
 import InputText from "./InputText";
+import '../styles/App.scss'
 
 function NewQuoteForm(prop) {
 
-
     return (
-        <form>
+        <form className="form">
             <InputText
                 labelText={'Frase: '}
                 inputId={'quote'}
-                inputValue={prop.quoteInput}
+                inputValue={prop.quoteValue}
                 onChange={prop.handleQuoteInput}
             />
 
             <InputText
                 labelText={'Personaje: '}
                 inputId={'character'}
-                inputValue={prop.characterInput}
+                inputValue={prop.characterValue}
                 onChange={prop.handleCharacterInput}
             />
 
-            <button
+            <button className="form-button"
                 onClick={prop.handleAddQuoteButon}>
                 Agregar Nueva frase
             </button>

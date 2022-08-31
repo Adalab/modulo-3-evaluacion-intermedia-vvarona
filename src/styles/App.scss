@@ -22,31 +22,47 @@
   padding: 4rem;
 }
 
-.quote-item {
+
+.quote{
+  &-list{
+  padding: 2rem;
+  margin: 0 5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(45rem, 1fr))
+  }
+
+  &-item {
   list-style: none;
   padding: 1rem;
-  margin: 1rem;
+  margin: 0.5rem 0.5rem;
   border: 0.25rem solid #ffca02;
   border-radius: 1rem;
   color: whitesmoke;
-  
-}
+  display: grid;
+  place-items: center;
+  }
 
-.quote-item-text {
+  &-item-text {
   font-style: italic;
   font-weight: 600;
+  padding-bottom: 1rem;
+  }
 }
 
-.form-button {
+
+
+.form{
+
+  &-button {
   background: #ffca02;
   border: none;
-  border-radius: 5rem;
+  border-radius: .5rem;
   padding: 1rem 3rem;
   font-weight: 600;
 }
-
-.form-button:active {
+  &-button:active {
   background: rgb(255, 208, 37);
   color: rgb(84, 84, 84);
 }
 
+}

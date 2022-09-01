@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
-import './styles/App.scss';
-import NewQuoteForm from './components/NewQuoteForm';
-import callToApi from './services/Fetch';
-import FilterForm from './components/FilterForm';
+import '../styles/App.scss';
+import NewQuoteForm from './NewQuoteForm';
+import callToApi from '../services/Fetch';
+import FilterForm from './FilterForm';
 
 function App() {
     const [quoteData, setQuoteData] = useState([]);
     const [quoteInput, setQuoteInput] = useState('');
     const [characterInput, setCharacterInput] = useState('');
     const [filterQuote, setFilterQuote] = useState('');
+    const [charactersOptions, setCharacterOptions] = useState('all')
 
     useEffect(() => {
         callToApi()
@@ -23,6 +24,19 @@ function App() {
             character: characterInput
         })
     };
+
+    const listOfCharacter = (list) => {
+        const characters = list.map((item) => item.character)
+        const noRepeatList = new Set(characters);
+        const result = Array.from(noRepeatList)
+
+        return result
+
+    }
+
+    const handleCharacterSelect = (ev) => {
+        setCharacterOptions(ev.target.value)
+    }
 
     const handleQuoteInput = (ev) => {
         setQuoteInput(ev.target.value);
@@ -45,8 +59,6 @@ function App() {
     const handleAddQuoteButon = (ev) => {
         ev.preventDefault();
 
-        console.log(quoteInput + ',' + characterInput);
-
         if (quoteInput !== "" && characterInput !== "") {
             const newQuote = createNewQuote(quoteInput, characterInput);
             setQuoteData([...quoteData, newQuote])
@@ -61,13 +73,16 @@ function App() {
     const filterByQuote = (quoteList) => {
         return (
             quoteList.filter((item) => item.quote.toLowerCase().includes(filterQuote.toLowerCase())))
+            .filter((item) => {
+                if (charactersOptions === 'all') {
+                    return true
+                } else {
+                    return (
+                        item.character.toLowerCase() === charactersOptions.toLowerCase())
+                }
+            })
     }
 
-    /*  const filterByCharacter = (quoteList) => {
-         return (
-             quoteList.filter((item) => item.character.toLowerCase() === filterCharacter.toLowerCase())
-         )
-     } */
     const filteredByText = filterByQuote(quoteData)
 
     const renderQuoteData = filteredByText.map((item, index) => {
@@ -82,11 +97,15 @@ function App() {
     return (
         <div className="App">
             <header>
-                <h1 className='header-title'>Frases de Friends</h1>
+                <h1 className='header-title'>Friends quotes</h1>
             </header>
             <FilterForm
                 handleFilterInput={handleFilterInput}
                 filterQuote={filterQuote}
+
+                value={charactersOptions}
+                onChange={handleCharacterSelect}
+                optionsArray={listOfCharacter(quoteData)}
             />
             <section>
                 <ul className='quote-list'>

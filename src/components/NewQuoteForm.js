@@ -6,14 +6,14 @@ function NewQuoteForm(prop) {
     return (
         <form className="form">
             <InputText
-                labelText={'Frase: '}
+                labelText={'Quote: '}
                 inputId={'quote'}
                 inputValue={prop.quoteValue}
                 onChange={prop.handleQuoteInput}
             />
 
             <InputText
-                labelText={'Personaje: '}
+                labelText={'Character: '}
                 inputId={'character'}
                 inputValue={prop.characterValue}
                 onChange={prop.handleCharacterInput}
@@ -21,7 +21,7 @@ function NewQuoteForm(prop) {
 
             <button className="form-button"
                 onClick={prop.handleAddQuoteButon}>
-                Agregar Nueva frase
+                Add New Quote
             </button>
         </form>
     );

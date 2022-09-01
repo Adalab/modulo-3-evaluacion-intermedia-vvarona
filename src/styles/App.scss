@@ -28,7 +28,7 @@
 .quote{
   &-list{
   padding: 2rem;
-  width: 100%;
+  width: 100vw;
   margin: 0 5rem;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(45rem, 1fr));
@@ -60,7 +60,7 @@
 .form{
 
   width: 100%;
-  
+
   &-button {
   background: #ffca02;
   border: none;

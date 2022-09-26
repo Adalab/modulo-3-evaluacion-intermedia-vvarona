@@ -3,6 +3,7 @@ import '../styles/App.scss';
 import NewQuoteForm from './NewQuoteForm';
 import callToApi from '../services/Fetch';
 import FilterForm from './FilterForm';
+import logo from '../images/friends_logo.png';
 
 function App() {
     const [quoteData, setQuoteData] = useState([]);
@@ -88,8 +89,10 @@ function App() {
     const renderQuoteData = filteredByText.map((item, index) => {
 
         return (<li className='quote-item' key={index}>
-            <p className='quote-item-text'>"{item.quote}"</p>
-            <span className='quote-item-character'>- {item.character}</span>
+            <section>
+                <p className='quote-item-text'>"{item.quote}"</p>
+                <span className='quote-item-character'>- {item.character}</span>
+            </section>
         </li>
         );
     });
@@ -97,7 +100,12 @@ function App() {
     return (
         <div className="App">
             <header>
-                <h1 className='header-title'>Friends quotes</h1>
+                <img
+                    src={logo}
+                    alt='Friends logo'
+                    className='header-logo'
+                />
+                <h2 className='header-subtitle'>Remember all your favorite quotes!</h2>
             </header>
             <FilterForm
                 handleFilterInput={handleFilterInput}

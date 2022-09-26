@@ -7,44 +7,56 @@
 :root {
   font-size: 62.5%;
   font-family: Arial, Helvetica, sans-serif;
+  
 }
 
 .App {
   text-align: center;
   font-size: 1.6rem;
-  background: #9c8cd4;
-  height: 100vh;
-  width: 100vw;
+  height: 150vh;
+  
 }
 
-.header-title{
-  color: white;
-  font-size: 5rem;
-  padding: 4rem;
-  width: 100%;
-}
+.header{
+  &-logo{
+    width: 60vw;
+    margin: 5rem 0;
+  }
 
+  &-title{
+    font-size: 5rem;
+    padding: 4rem;
+    width: 100%;
+  }
+  &-subtitle{
+    transform: translateY(-2.5rem)
+  }
+}
 
 .quote{
   &-list{
   padding: 2rem;
-  width: 100vw;
   margin: 0 5rem;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(45rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(40rem, 1fr));
   transition: 500ms;
   }
 
   &-item {
   list-style: none;
-  padding: 1rem;
-  margin: 0.5rem 0.5rem;
-  border: 0.25rem solid #ffca02;
-  border-radius: 1rem;
-  color: whitesmoke;
+  padding: 2rem;
+  margin: 0.5rem 1rem;
+  background: white;
+  border: 0.25rem solid black;
+  border-radius: .4rem;
   display: grid;
   place-items: center;
   transition: all 500ms;
+  filter: drop-shadow(5px 5px 4px rgba(0, 0, 0, 0.1));
+
+  &-character {
+    place-self: end;
+  }
   }
 
   &-item-text {
@@ -62,15 +74,22 @@
   width: 100%;
 
   &-button {
-  background: #ffca02;
+  background: black;
+  color: white;
   border: none;
   border-radius: .5rem;
   padding: 1rem 3rem;
   font-weight: 600;
+  transition: 200ms;
+
+  &:hover{
+    background: dimgray;
+  }
 }
   &-button:active {
-  background: rgb(255, 208, 37);
-  color: rgb(84, 84, 84);
+  background: dimgray;
+  color: white;
+  scale: .98;
 }
 
 }

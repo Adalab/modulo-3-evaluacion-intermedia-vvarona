@@ -135,8 +135,8 @@ function App() {
             </section>
 
             <footer className='footer'>
-                <p>Made with love by Victoria Varona</p>
-                <a href='https://github.com/vvarona'>See more...</a>
+                <p>Made with love by Victoria Varona in 2022</p>
+                <a href='https://github.com/vvarona'>See more of my work...</a>
             </footer>
         </div>
     );

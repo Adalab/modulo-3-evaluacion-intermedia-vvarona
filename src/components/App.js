@@ -107,26 +107,37 @@ function App() {
                 />
                 <h2 className='header-subtitle'>Remember all your favorite quotes!</h2>
             </header>
-            <FilterForm
-                handleFilterInput={handleFilterInput}
-                filterQuote={filterQuote}
 
-                value={charactersOptions}
-                onChange={handleCharacterSelect}
-                optionsArray={listOfCharacter(quoteData)}
-            />
+            <section className='fields'>
+
+                <FilterForm
+                    handleFilterInput={handleFilterInput}
+                    filterQuote={filterQuote}
+
+                    value={charactersOptions}
+                    onChange={handleCharacterSelect}
+                    optionsArray={listOfCharacter(quoteData)}
+                />
+
+                <NewQuoteForm
+                    handleAddQuoteButon={handleAddQuoteButon}
+                    handleCharacterInput={handleCharacterInput}
+                    handleQuoteInput={handleQuoteInput}
+                    quoteValue={quoteInput}
+                    characterValue={characterInput}
+                />
+            </section>
+
             <section>
                 <ul className='quote-list'>
                     {renderQuoteData}
                 </ul>
             </section>
-            <NewQuoteForm
-                handleAddQuoteButon={handleAddQuoteButon}
-                handleCharacterInput={handleCharacterInput}
-                handleQuoteInput={handleQuoteInput}
-                quoteValue={quoteInput}
-                characterValue={characterInput}
-            />
+
+            <footer className='footer'>
+                <p>Made with love by Victoria Varona</p>
+                <a href='https://github.com/vvarona'>See more...</a>
+            </footer>
         </div>
     );
 }

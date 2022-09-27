@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Ubuntu:wght@300;400;500;700&display=swap');
+
+
 *{
   box-sizing: border-box;
   margin: 0;
@@ -6,7 +9,7 @@
 
 :root {
   font-size: 62.5%;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Ubuntu', sans-serif;
   
 }
 
@@ -29,8 +32,25 @@
     width: 100%;
   }
   &-subtitle{
-    transform: translateY(-2.5rem)
+    transform: translateY(-2.5rem);
+    padding: 0 2rem;
   }
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 2rem;
+  gap: 2rem;
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+   }
+  
+}
+.search-section{
+  border: 2px solid purple;
+  grid-column: 1/2;
 }
 
 .quote{
@@ -40,6 +60,10 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(40rem, 1fr));
   transition: 500ms;
+  @media (max-width: 480px) {
+  grid-template-columns: 1fr;
+   margin: .5rem;
+  }
   }
 
   &-item {
@@ -54,8 +78,17 @@
   transition: all 500ms;
   filter: drop-shadow(5px 5px 4px rgba(0, 0, 0, 0.1));
 
+  @media (max-width: 480px) {
+    margin: .5rem;
+    padding: 2rem;
+   }
+
   &-character {
     place-self: end;
+    
+    @media (max-width: 480px) {
+      place-self: center;
+     }
   }
   }
 
@@ -67,29 +100,46 @@
   }
 }
 
+.form {
+  grid-column: 2/3;
+}
 
-
-.form{
-
-  width: 100%;
+.form , .search-section{
+  font-size: 2rem;
+  text-align: start;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: .5rem;
+  padding: 1rem;
+  background-color: rgba(217, 217, 217, 0.66);
 
   &-button {
-  background: black;
-  color: white;
-  border: none;
-  border-radius: .5rem;
-  padding: 1rem 3rem;
-  font-weight: 600;
-  transition: 200ms;
+    
+    background: black;
+    color: white;
+    border: none;
+    border-radius: .5rem;
+    padding: 1rem 3rem;
+    margin: 1rem 0;
+    font-weight: 600;
+    font-size: 1.6rem;
+    transition: 200ms;
 
   &:hover{
     background: dimgray;
   }
 }
   &-button:active {
-  background: dimgray;
-  color: white;
-  scale: .98;
+    background: dimgray;
+    color: white;
+    scale: .98;
+  }
 }
 
+.footer {
+  opacity: 25%;
+  margin-top: 5rem;
+  padding: 5rem;
+  border-top: solid 3px rgba(0, 0, 0, 0.448);
 }

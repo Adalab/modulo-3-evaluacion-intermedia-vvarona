@@ -5,7 +5,7 @@ import InputText from "./InputText";
 function FilterForm(prop) {
 
     return (
-        <>
+        <div className="search-section">
             <InputText
                 labelText={'Search: '}
                 inputId={'filter'}
@@ -24,7 +24,7 @@ function FilterForm(prop) {
 
             />
 
-        </>
+        </div>
 
 
     );
